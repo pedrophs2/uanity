@@ -25,17 +25,12 @@ class UanityApp extends StatelessWidget {
         MaterialColor(const Color.fromARGB(255, 4, 43, 73).value, colorCodes);
 
     return MaterialApp(
-      theme: ThemeData(
-        primaryColor: _customColors,
-        primarySwatch: _customColors,
-      ),
-      title: 'UANity',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('UANity'),
+        theme: ThemeData(
+          primaryColor: _customColors,
+          primarySwatch: _customColors,
         ),
-        body: const LoginView(),
-      ),
-    );
+        debugShowCheckedModeBanner: true,
+        title: 'UANity',
+        home: const LoginView());
   }
 }

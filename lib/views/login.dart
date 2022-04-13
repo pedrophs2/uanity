@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:uanity/views/home/home.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -16,60 +17,90 @@ class _LoginViewState extends State<LoginView> {
       'password': FormControl<String>(),
     });
 
-    String cpf = '';
-    String password = '';
+    bool _validateLogin() {
+      bool _cpf = formGroup.control('cpf').value == '12345';
+      bool _password = formGroup.control('password').value == 'admin';
 
-    void _updateData() {
-      print(formGroup.value);
-      print(formGroup.control('cpf').value);
-      print(formGroup.control('password').value);
-      setState(() {
-        cpf = formGroup.control('cpf').value;
-        password = formGroup.control('password').value;
-      });
-      print(cpf);
-      print(password);
+      print('$_cpf e $_password');
+
+      if (_cpf && _password) {
+        return true;
+      }
+
+      return false;
     }
 
-    return SizedBox(
-      child: ReactiveForm(
-        formGroup: formGroup,
-        child: SizedBox(
-          height: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(25),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset('assets/images/logo-lemos.png'),
-                const SizedBox(height: 50),
-                ReactiveTextField(
-                  formControlName: 'cpf',
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  decoration: const InputDecoration(
-                    labelText: 'CPF',
-                    border: OutlineInputBorder(),
+    void _login() {
+      if (_validateLogin()) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) {
+              return const HomeView();
+            },
+          ),
+        );
+        return;
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('CPF ou senha incorretos'),
+          action: SnackBarAction(
+            label: 'OK',
+            onPressed: () {},
+            textColor: Colors.blue[300],
+          ),
+        ),
+      );
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'UANity',
+        ),
+      ),
+      body: SizedBox(
+        child: ReactiveForm(
+          formGroup: formGroup,
+          child: SizedBox(
+            height: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/images/logo-lemos.png'),
+                  const SizedBox(height: 50),
+                  ReactiveTextField(
+                    formControlName: 'cpf',
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
+                    decoration: const InputDecoration(
+                      labelText: 'CPF',
+                      border: OutlineInputBorder(),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                ReactiveTextField(
-                  formControlName: 'password',
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Senha',
-                    border: OutlineInputBorder(),
+                  const SizedBox(height: 10),
+                  ReactiveTextField(
+                    formControlName: 'password',
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Senha',
+                      border: OutlineInputBorder(),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _updateData,
-                    child: const Text('Login'),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: _login,
+                      child: const Text('Login'),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
