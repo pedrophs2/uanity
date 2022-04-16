@@ -27,6 +27,8 @@ class _LoginViewState extends State<LoginView> {
         return true;
       }
 
+      print(formGroup.control('cpf').value);
+      print(formGroup.control('password').value);
       return false;
     }
 
@@ -55,12 +57,6 @@ class _LoginViewState extends State<LoginView> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'UANity',
-        ),
-      ),
       body: SizedBox(
         child: ReactiveForm(
           formGroup: formGroup,

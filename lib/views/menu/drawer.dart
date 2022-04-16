@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uanity/views/equipe/equipe.dart';
-import 'package:uanity/views/home/home.dart';
+import 'package:uanity/views/estoque/estoque.dart';
 import 'package:uanity/views/login.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -57,7 +57,7 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () => _goTo(const EstoqueView()),
             textColor: Theme.of(context).primaryColor,
             iconColor: Theme.of(context).primaryColor,
             leading: const Icon(Icons.shopping_basket_rounded),
@@ -78,7 +78,7 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Equipe'),
           ),
           ListTile(
-            onTap: () {},
+            onTap: _logout,
             iconColor: Colors.red,
             textColor: Colors.red,
             leading: const Icon(

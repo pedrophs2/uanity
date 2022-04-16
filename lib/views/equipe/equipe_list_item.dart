@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uanity/entities/funcionario.dart';
+import 'package:uanity/enums/cargo_enum.dart';
 import 'package:uanity/views/equipe/equipe_form.dart';
 
 class EquipeListItem extends StatelessWidget {
@@ -43,7 +44,7 @@ class EquipeListItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(funcionario.cargo),
+                        Text('${cargoLabels[funcionario.cargo]}'),
                         const SizedBox(height: 3),
                         Text(funcionario.cpf),
                       ],
