@@ -30,7 +30,7 @@ class UanityApp extends StatelessWidget {
           primarySwatch: _customColors,
         ),
         debugShowCheckedModeBanner: false,
-        title: 'UANity',
+        title: 'Uanity',
         home: const LoginView());
   }
 }
