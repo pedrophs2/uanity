@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import 'package:uanity/dtos/login_dto.dart';
+import 'package:uanity/uanity-api/auth/auth_controller.dart';
 import 'package:uanity/views/home/home.dart';
 
 class LoginView extends StatefulWidget {
@@ -12,28 +13,17 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
-    final formGroup = FormGroup({
-      'cpf': FormControl<String>(),
-      'password': FormControl<String>(),
-    });
+    TextEditingController cpfController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
 
-    bool _validateLogin() {
-      bool _cpf = formGroup.control('cpf').value == '12345';
-      bool _password = formGroup.control('password').value == 'admin';
+    void _login() async {
+      LoginDTO loginDto = LoginDTO(
+        cpf: cpfController.text,
+        password: passwordController.text,
+      );
 
-      print('$_cpf e $_password');
-
-      if (_cpf && _password) {
-        return true;
-      }
-
-      print(formGroup.control('cpf').value);
-      print(formGroup.control('password').value);
-      return false;
-    }
-
-    void _login() {
-      if (_validateLogin()) {
+      var response = await AuthController().login(loginDto.toJson());
+      if (response.statusCode == 201) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (_) {
@@ -58,45 +48,42 @@ class _LoginViewState extends State<LoginView> {
 
     return Scaffold(
       body: SizedBox(
-        child: ReactiveForm(
-          formGroup: formGroup,
-          child: SizedBox(
-            height: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(25),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('assets/images/logo-lemos.png'),
-                  const SizedBox(height: 50),
-                  ReactiveTextField(
-                    formControlName: 'cpf',
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
-                    decoration: const InputDecoration(
-                      labelText: 'CPF',
-                      border: OutlineInputBorder(),
-                    ),
+        child: SizedBox(
+          height: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(25),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('assets/images/logo-lemos.png'),
+                const SizedBox(height: 50),
+                TextField(
+                  controller: cpfController,
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
                   ),
-                  const SizedBox(height: 10),
-                  ReactiveTextField(
-                    formControlName: 'password',
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Senha',
-                      border: OutlineInputBorder(),
-                    ),
+                  decoration: const InputDecoration(
+                    labelText: 'CPF',
+                    border: OutlineInputBorder(),
                   ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: _login,
-                      child: const Text('Login'),
-                    ),
+                ),
+                const SizedBox(height: 10),
+                TextField(
+                  controller: passwordController,
+                  decoration: const InputDecoration(
+                    labelText: 'Senha',
+                    border: OutlineInputBorder(),
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _login,
+                    child: const Text('Login'),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

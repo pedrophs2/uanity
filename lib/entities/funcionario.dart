@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Funcionario {
   final int id;
   final String nome;
@@ -11,4 +13,16 @@ class Funcionario {
       required this.cpf,
       required this.cargo,
       required this.senha});
+
+  String toJson() {
+    var data = {
+      'id': this.id,
+      'nome': this.nome,
+      'cpf': this.cpf,
+      'cargo': this.cargo,
+      'senha': this.senha
+    };
+
+    return jsonEncode(data);
+  }
 }
