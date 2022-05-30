@@ -16,13 +16,23 @@ class Funcionario {
 
   String toJson() {
     var data = {
-      'id': this.id,
-      'nome': this.nome,
-      'cpf': this.cpf,
-      'cargo': this.cargo,
-      'senha': this.senha
+      'id': id,
+      'name': nome,
+      'cpf': cpf,
+      'type': cargo,
+      'password': senha
     };
 
     return jsonEncode(data);
+  }
+
+  static Funcionario fromJson(Map<String, dynamic> json) {
+    return Funcionario(
+      id: json['id'],
+      nome: json['name'],
+      cpf: json['cpf'],
+      cargo: json['type'],
+      senha: json['password'],
+    );
   }
 }

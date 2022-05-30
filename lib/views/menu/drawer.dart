@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:uanity/routes/app_routes.dart';
 import 'package:uanity/views/equipe/equipe.dart';
 import 'package:uanity/views/estoque/estoque.dart';
-import 'package:uanity/views/login.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -9,24 +9,12 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void _logout() {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (_) {
-            return const LoginView();
-          },
-        ),
-      );
+      Navigator.of(context).pushReplacementNamed(AppRoutes.login);
     }
 
-    void _goTo(Widget destination) {
-      Navigator.pop(context);
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (_) {
-            return destination;
-          },
-        ),
-      );
+    void _goTo(String route) {
+      // Navigator.pop(context);
+      Navigator.of(context).pushNamed(route);
     }
 
     return Drawer(
@@ -57,7 +45,7 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: () => _goTo(const EstoqueView()),
+            onTap: () => _goTo(AppRoutes.estoque),
             textColor: Theme.of(context).primaryColor,
             iconColor: Theme.of(context).primaryColor,
             leading: const Icon(Icons.shopping_basket_rounded),
@@ -71,7 +59,7 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Histórico de Uso'),
           ),
           ListTile(
-            onTap: () => _goTo(const EquipeView()),
+            onTap: () => _goTo(AppRoutes.equipe),
             textColor: Theme.of(context).primaryColor,
             iconColor: Theme.of(context).primaryColor,
             leading: const Icon(Icons.people),

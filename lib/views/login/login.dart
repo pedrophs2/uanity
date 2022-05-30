@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uanity/dtos/login_dto.dart';
-import 'package:uanity/uanity-api/auth/auth_controller.dart';
-import 'package:uanity/views/home/home.dart';
+import 'package:uanity/helpers/login_helper.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -22,28 +21,7 @@ class _LoginViewState extends State<LoginView> {
         password: passwordController.text,
       );
 
-      var response = await AuthController().login(loginDto.toJson());
-      if (response.statusCode == 201) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (_) {
-              return const HomeView();
-            },
-          ),
-        );
-        return;
-      }
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('CPF ou senha incorretos'),
-          action: SnackBarAction(
-            label: 'OK',
-            onPressed: () {},
-            textColor: Colors.blue[300],
-          ),
-        ),
-      );
+      await LoginHelper().login(loginDto, context);
     }
 
     return Scaffold(
@@ -69,6 +47,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 const SizedBox(height: 10),
                 TextField(
+                  obscureText: true,
                   controller: passwordController,
                   decoration: const InputDecoration(
                     labelText: 'Senha',

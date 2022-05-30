@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uanity/entities/funcionario.dart';
 import 'package:uanity/enums/cargo_enum.dart';
-import 'package:uanity/views/equipe/equipe_form.dart';
+import 'package:uanity/routes/equipe_routes.dart';
 
 class EquipeListItem extends StatelessWidget {
   final Funcionario funcionario;
@@ -11,13 +11,8 @@ class EquipeListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void _openFuncionario(Funcionario funcionario) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (_) {
-            return EquipeForm(funcionario: funcionario);
-          },
-        ),
-      );
+      Navigator.of(context)
+          .pushNamed(EquipeRoutes.funcionarioRoute, arguments: funcionario);
     }
 
     return Card(
@@ -54,10 +49,6 @@ class EquipeListItem extends StatelessWidget {
               ),
               const Spacer(),
               const Icon(Icons.chevron_right_sharp),
-              // IconButton(
-              //   onPressed: () {},
-              //   icon: const Icon(Icons.chevron_right_sharp),
-              // )
             ],
           ),
         ),
