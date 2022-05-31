@@ -1,10 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:uanity/entities/usuario.dart';
 import 'package:uanity/routes/equipe_routes.dart';
 import 'package:uanity/uanity-api/users/user_controller.dart';
 import 'package:uanity/views/equipe/equipe_list_item.dart';
-import '../../entities/funcionario.dart';
 
 class EquipeView extends StatefulWidget {
   const EquipeView({Key? key}) : super(key: key);
@@ -14,20 +12,13 @@ class EquipeView extends StatefulWidget {
 }
 
 class _EquipeViewState extends State<EquipeView> {
-  List<Funcionario> usuarios = [];
+  List<Usuario> usuarios = [];
   void _goToForm() {
-    Navigator.of(context).pushNamed(EquipeRoutes.funcionarioRoute);
+    Navigator.of(context).pushNamed(EquipeRoutes.usuarioRoute);
   }
 
   Future<void> _populateUsuarios() async {
-    var response = await UserController().listAll();
-    var _jsonUsuarios = await jsonDecode(response.body);
-    usuarios = [];
-
-    List<Funcionario> _usuarios = [];
-    for (var usuario in _jsonUsuarios) {
-      _usuarios.add(Funcionario.fromJson(usuario));
-    }
+    List<Usuario> _usuarios = await UserController().listAll();
 
     setState(() {
       usuarios = _usuarios;
@@ -78,8 +69,8 @@ class _EquipeViewState extends State<EquipeView> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: usuarios.map((funcionario) {
-                  return EquipeListItem(funcionario: funcionario);
+                children: usuarios.map((Usuario usuario) {
+                  return EquipeListItem(usuario: usuario);
                 }).toList(),
               ),
             ],

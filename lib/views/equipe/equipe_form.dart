@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:uanity/entities/funcionario.dart';
+import 'package:http/http.dart';
+import 'package:uanity/dtos/criar_usuario_dto.dart';
+import 'package:uanity/entities/usuario.dart';
 import 'package:uanity/enums/cargo_enum.dart';
+import 'package:uanity/helpers/snack_helper.dart';
+import 'package:uanity/uanity-api/users/user_controller.dart';
 
 class EquipeForm extends StatefulWidget {
   const EquipeForm({Key? key}) : super(key: key);
@@ -13,11 +16,15 @@ class EquipeForm extends StatefulWidget {
 class _EquipeFormState extends State<EquipeForm> {
   @override
   Widget build(BuildContext context) {
-    final Funcionario? funcionario =
-        ModalRoute.of(context)?.settings.arguments as Funcionario;
+    final Usuario? usuario = ModalRoute.of(context)?.settings.arguments != null
+        ? ModalRoute.of(context)?.settings.arguments as Usuario
+        : null;
 
     final String title =
-        funcionario != null ? funcionario.nome : 'Cadastro de Funcionário';
+        usuario != null ? usuario.nome : 'Cadastro de Funcionário';
+
+    final bool editCargo = usuario == null;
+    final int userId = usuario != null ? usuario.id : 0;
 
     TextEditingController nomeController = TextEditingController();
     TextEditingController cpfController = TextEditingController();
@@ -25,13 +32,36 @@ class _EquipeFormState extends State<EquipeForm> {
     TextEditingController senhaController = TextEditingController();
 
     populateForm() {
-      if (funcionario != null) {
-        nomeController.text = funcionario.nome;
-        cpfController.text = funcionario.cpf;
-        cargoController.text = (cargoLabels.containsKey(funcionario.cargo)
-            ? cargoLabels[funcionario.cargo]
+      if (usuario != null) {
+        nomeController.text = usuario.nome;
+        cpfController.text = usuario.cpf;
+        senhaController.text = usuario.senha;
+
+        cargoController.text = (cargoLabels.containsKey(usuario.cargo)
+            ? cargoLabels[usuario.cargo]
             : 'Não cadastrado')!;
-        senhaController.text = funcionario.senha;
+      }
+    }
+
+    createUser() async {
+      CriarUsuarioDTO usuarioDTO = CriarUsuarioDTO(
+        nome: nomeController.text,
+        cpf: cpfController.text,
+        cargo: int.parse(cargoController.text),
+        senha: senhaController.text,
+      );
+
+      await UserController().createUser(usuarioDTO);
+      SnackHelper().present(context, 'Usuário criado com sucesso !');
+      Navigator.of(context).pop();
+    }
+
+    deleteUser() async {
+      Response response = await UserController().deleteUser(userId);
+
+      if (response.statusCode == 200) {
+        SnackHelper().present(context, 'Usuário excluído com sucesso');
+        Navigator.of(context).pop();
       }
     }
 
@@ -78,7 +108,7 @@ class _EquipeFormState extends State<EquipeForm> {
                 ),
                 const SizedBox(height: 10),
                 TextField(
-                  enabled: false,
+                  enabled: editCargo,
                   controller: cargoController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -88,10 +118,20 @@ class _EquipeFormState extends State<EquipeForm> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: createUser,
                     child: const Text('Salvar'),
                   ),
-                )
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                    ),
+                    onPressed: deleteUser,
+                    child: const Text('Excluir'),
+                  ),
+                ),
               ],
             )
           ],

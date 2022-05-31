@@ -1,3 +1,3 @@
 class EquipeRoutes {
-  static const funcionarioRoute = 'funcionario';
+  static const usuarioRoute = 'usuario';
 }

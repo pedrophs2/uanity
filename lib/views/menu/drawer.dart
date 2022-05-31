@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:uanity/routes/app_routes.dart';
-import 'package:uanity/views/equipe/equipe.dart';
-import 'package:uanity/views/estoque/estoque.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -64,6 +62,13 @@ class AppDrawer extends StatelessWidget {
             iconColor: Theme.of(context).primaryColor,
             leading: const Icon(Icons.people),
             title: const Text('Equipe'),
+          ),
+          ListTile(
+            onTap: () {},
+            textColor: Theme.of(context).primaryColor,
+            iconColor: Theme.of(context).primaryColor,
+            leading: const Icon(Icons.fastfood),
+            title: const Text('Produtos'),
           ),
           ListTile(
             onTap: _logout,

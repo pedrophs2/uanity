@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:uanity/helpers/colors_helper.dart';
 import 'package:uanity/routes/app_routes.dart';
 import 'package:uanity/routes/equipe_routes.dart';
 import 'package:uanity/views/equipe/equipe.dart';
@@ -15,21 +16,10 @@ class UanityApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<int, Color> colorCodes = const {
-      50: Color.fromRGBO(4, 43, 73, .1),
-      100: Color.fromRGBO(4, 43, 73, .2),
-      200: Color.fromRGBO(4, 43, 73, .3),
-      300: Color.fromRGBO(4, 43, 73, .4),
-      400: Color.fromRGBO(4, 43, 73, .5),
-      500: Color.fromRGBO(4, 43, 73, .6),
-      600: Color.fromRGBO(4, 43, 73, .7),
-      700: Color.fromRGBO(4, 43, 73, .8),
-      800: Color.fromRGBO(4, 43, 73, .9),
-      900: Color.fromRGBO(4, 43, 73, 1),
-    };
-
-    MaterialColor _customColors =
-        MaterialColor(const Color.fromARGB(255, 4, 43, 73).value, colorCodes);
+    MaterialColor _customColors = MaterialColor(
+      ColorsHelper.mainColor,
+      ColorsHelper.colorCodes,
+    );
 
     return MaterialApp(
       theme: ThemeData(
@@ -47,7 +37,7 @@ class UanityApp extends StatelessWidget {
         AppRoutes.equipe: (_) => const EquipeView(),
 
         //Equipe Routes
-        EquipeRoutes.funcionarioRoute: (_) => const EquipeForm(),
+        EquipeRoutes.usuarioRoute: (_) => const EquipeForm(),
       },
       builder: EasyLoading.init(),
     );

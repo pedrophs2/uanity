@@ -11,7 +11,7 @@ class LoginHelper {
   static const int successStatusCode = 201;
 
   login(LoginDTO loginDto, BuildContext context) async {
-    var res = await AuthController().login(loginDto.toJson());
+    var res = await AuthController().login(loginDto);
 
     if (res.statusCode == successStatusCode) {
       const storage = FlutterSecureStorage();

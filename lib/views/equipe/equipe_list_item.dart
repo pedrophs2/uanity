@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:uanity/entities/funcionario.dart';
+import 'package:uanity/entities/usuario.dart';
 import 'package:uanity/enums/cargo_enum.dart';
 import 'package:uanity/routes/equipe_routes.dart';
 
 class EquipeListItem extends StatelessWidget {
-  final Funcionario funcionario;
+  final Usuario usuario;
 
-  const EquipeListItem({Key? key, required this.funcionario}) : super(key: key);
+  const EquipeListItem({Key? key, required this.usuario}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    void _openFuncionario(Funcionario funcionario) {
+    void _openUsuario(Usuario usuario) {
       Navigator.of(context)
-          .pushNamed(EquipeRoutes.funcionarioRoute, arguments: funcionario);
+          .pushNamed(EquipeRoutes.usuarioRoute, arguments: usuario);
     }
 
     return Card(
       elevation: 10,
       child: InkWell(
-        onTap: () => _openFuncionario(funcionario),
+        onTap: () => _openUsuario(usuario),
         borderRadius: BorderRadius.circular(4),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -29,7 +29,7 @@ class EquipeListItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    funcionario.nome,
+                    usuario.nome,
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15),
                   ),
@@ -39,9 +39,9 @@ class EquipeListItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('${cargoLabels[funcionario.cargo]}'),
+                        Text('${cargoLabels[usuario.cargo]}'),
                         const SizedBox(height: 3),
-                        Text(funcionario.cpf),
+                        Text(usuario.cpf),
                       ],
                     ),
                   )

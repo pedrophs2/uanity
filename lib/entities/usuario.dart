@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-class Funcionario {
+class Usuario {
   final int id;
   final String nome;
   final String cpf;
   final int cargo;
   final String senha;
 
-  const Funcionario(
+  const Usuario(
       {required this.id,
       required this.nome,
       required this.cpf,
@@ -26,8 +26,8 @@ class Funcionario {
     return jsonEncode(data);
   }
 
-  static Funcionario fromJson(Map<String, dynamic> json) {
-    return Funcionario(
+  static Usuario fromJson(Map<String, dynamic> json) {
+    return Usuario(
       id: json['id'],
       nome: json['name'],
       cpf: json['cpf'],
