@@ -66,12 +66,13 @@ class _EquipeViewState extends State<EquipeView> {
               const SizedBox(
                 height: 5,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: usuarios.map((Usuario usuario) {
-                  return EquipeListItem(usuario: usuario);
-                }).toList(),
+              ListView.builder(
+                itemCount: usuarios.length,
+                itemBuilder: (context, index) {
+                  return EquipeListItem(
+                    usuario: usuarios[index],
+                  );
+                },
               ),
             ],
           ),
