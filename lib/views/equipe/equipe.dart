@@ -43,38 +43,41 @@ class _EquipeViewState extends State<EquipeView> {
           )
         ],
       ),
-      body: SizedBox(
-        width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            children: [
-              const TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Nome do funcionário',
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              children: [
+                const TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Nome do funcionário',
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              const Divider(
-                indent: 20,
-                endIndent: 20,
-                thickness: 1,
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              ListView.builder(
-                itemCount: usuarios.length,
-                itemBuilder: (context, index) {
-                  return EquipeListItem(
-                    usuario: usuarios[index],
-                  );
-                },
-              ),
-            ],
+                const SizedBox(
+                  height: 5,
+                ),
+                const Divider(
+                  indent: 20,
+                  endIndent: 20,
+                  thickness: 1,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: usuarios
+                      .map(
+                        (Usuario usuario) => EquipeListItem(usuario: usuario),
+                      )
+                      .toList(),
+                )
+              ],
+            ),
           ),
         ),
       ),
