@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:uanity/routes/produto_routes.dart';
 
 class EstoqueView extends StatefulWidget {
   const EstoqueView({Key? key}) : super(key: key);
@@ -12,14 +12,8 @@ class _EstoqueViewState extends State<EstoqueView> {
   String barcode = 'Barcode here';
   @override
   Widget build(BuildContext context) {
-    _scan() async {
-      String barcodeScan = await FlutterBarcodeScanner.scanBarcode(
-          "#e28743", "Cancelar", false, ScanMode.BARCODE);
-
-      setState(() {
-        barcode = barcodeScan;
-        // barcode = 'Changed';
-      });
+    _openForm() {
+      Navigator.of(context).pushNamed(ProdutoRoutes.cadastroRoute);
     }
 
     return Scaffold(
@@ -28,7 +22,7 @@ class _EstoqueViewState extends State<EstoqueView> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: _scan,
+            onPressed: _openForm,
             icon: const Icon(Icons.add),
           )
         ],

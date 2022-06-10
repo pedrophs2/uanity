@@ -3,9 +3,11 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:uanity/helpers/colors_helper.dart';
 import 'package:uanity/routes/app_routes.dart';
 import 'package:uanity/routes/equipe_routes.dart';
+import 'package:uanity/routes/produto_routes.dart';
 import 'package:uanity/views/equipe/equipe.dart';
 import 'package:uanity/views/equipe/equipe_form.dart';
 import 'package:uanity/views/estoque/estoque.dart';
+import 'package:uanity/views/estoque/produto_form.dart';
 import 'package:uanity/views/home/home.dart';
 import 'package:uanity/views/login/login.dart';
 
@@ -36,8 +38,11 @@ class UanityApp extends StatelessWidget {
         AppRoutes.estoque: (_) => const EstoqueView(),
         AppRoutes.equipe: (_) => const EquipeView(),
 
-        //Equipe Routes
+        // Equipe Routes
         EquipeRoutes.usuarioRoute: (_) => const EquipeForm(),
+
+        // Produto Routes
+        ProdutoRoutes.cadastroRoute: (_) => const ProdutoForm()
       },
       builder: EasyLoading.init(),
     );
