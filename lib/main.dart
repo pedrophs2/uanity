@@ -4,12 +4,12 @@ import 'package:uanity/helpers/colors_helper.dart';
 import 'package:uanity/routes/app_routes.dart';
 import 'package:uanity/routes/equipe_routes.dart';
 import 'package:uanity/routes/produto_routes.dart';
-import 'package:uanity/views/equipe/equipe.dart';
-import 'package:uanity/views/equipe/equipe_form.dart';
+import 'package:uanity/views/equipe/list/equipe.widget.dart';
+import 'package:uanity/views/equipe/form/equipe_form.widget.dart';
 import 'package:uanity/views/estoque/estoque.dart';
-import 'package:uanity/views/estoque/produto_form.dart';
+import 'package:uanity/views/estoque/form/produto_form.widget.dart';
 import 'package:uanity/views/home/home.dart';
-import 'package:uanity/views/login/login.dart';
+import 'package:uanity/views/login/login.view.dart';
 
 main() => runApp(const UanityApp());
 
@@ -36,13 +36,13 @@ class UanityApp extends StatelessWidget {
         AppRoutes.login: (_) => const LoginView(),
         AppRoutes.home: (_) => const HomeView(),
         AppRoutes.estoque: (_) => const EstoqueView(),
-        AppRoutes.equipe: (_) => const EquipeView(),
+        AppRoutes.equipe: (_) => const EquipeViewWidget(),
 
         // Equipe Routes
         EquipeRoutes.usuarioRoute: (_) => const EquipeForm(),
 
         // Produto Routes
-        ProdutoRoutes.cadastroRoute: (_) => const ProdutoForm()
+        ProdutoRoutes.cadastroRoute: (_) => const ProdutoFormWidget()
       },
       builder: EasyLoading.init(),
     );

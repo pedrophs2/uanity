@@ -3,10 +3,13 @@ import 'package:uanity/entities/usuario.dart';
 import 'package:uanity/enums/cargo_enum.dart';
 import 'package:uanity/routes/equipe_routes.dart';
 
-class EquipeListItem extends StatelessWidget {
+class StaffListItemWidget extends StatelessWidget {
   final Usuario usuario;
 
-  const EquipeListItem({Key? key, required this.usuario}) : super(key: key);
+  const StaffListItemWidget({
+    Key? key,
+    required this.usuario,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

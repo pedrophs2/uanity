@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 class LoginDTO {
-  final String cpf;
-  final String password;
+  final String? cpf;
+  final String? password;
 
   const LoginDTO({required this.cpf, required this.password});
 
