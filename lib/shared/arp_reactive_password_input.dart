@@ -6,11 +6,13 @@ class ArpReactivePasswordInput extends StatefulWidget {
   final TextInputType keyboardType;
   final String controlName;
   final bool enabled;
+  final ValidationMessagesFunction<dynamic>? validationMessages;
 
   const ArpReactivePasswordInput({
     Key? key,
     this.keyboardType = TextInputType.text,
     this.enabled = true,
+    this.validationMessages,
     required this.label,
     required this.controlName,
   }) : super(key: key);
@@ -32,9 +34,12 @@ class _ArpReactivePasswordInputState extends State<ArpReactivePasswordInput> {
     return ReactiveTextField(
       formControlName: widget.controlName,
       keyboardType: widget.keyboardType,
+      obscureText: isHidden,
+      validationMessages: widget.validationMessages,
       decoration: InputDecoration(
         label: Text(widget.label),
         border: const OutlineInputBorder(),
+        enabled: widget.enabled,
         suffixIcon: IconButton(
           icon: Icon(icons[isHidden]),
           onPressed: () {
@@ -43,9 +48,7 @@ class _ArpReactivePasswordInputState extends State<ArpReactivePasswordInput> {
             });
           },
         ),
-        enabled: widget.enabled,
       ),
-      obscureText: isHidden,
     );
   }
 }

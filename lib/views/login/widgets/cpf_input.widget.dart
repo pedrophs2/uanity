@@ -6,10 +6,14 @@ class CpfInputWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ArpReactiveInput(
+    return ArpReactiveInput(
       label: 'CPF',
       controlName: 'cpf',
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      validationMessages: (control) => {
+        'required': 'O CPF não pode ser vazio',
+        'minLength': 'O CPF deve ter no mínimo 11 caracteres'
+      },
     );
   }
 }

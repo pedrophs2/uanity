@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uanity/routes/app_routes.dart';
+import 'package:uanity/views/menu/widgets/menu_icon.widget.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -11,7 +12,6 @@ class AppDrawer extends StatelessWidget {
     }
 
     void _goTo(String route) {
-      // Navigator.pop(context);
       Navigator.of(context).pushNamed(route);
     }
 
@@ -26,11 +26,7 @@ class AppDrawer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: const [
-                Icon(
-                  Icons.account_circle,
-                  color: Colors.white,
-                  size: 100,
-                ),
+                MenuIconWidget(),
                 SizedBox(height: 10),
                 Text(
                   'Valesca Lima',

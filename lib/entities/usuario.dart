@@ -7,12 +7,13 @@ class Usuario {
   final int cargo;
   final String senha;
 
-  const Usuario(
-      {required this.id,
-      required this.nome,
-      required this.cpf,
-      required this.cargo,
-      required this.senha});
+  const Usuario({
+    required this.id,
+    required this.nome,
+    required this.cpf,
+    required this.cargo,
+    required this.senha,
+  });
 
   String toJson() {
     var data = {

@@ -38,7 +38,7 @@ class _EstoqueViewState extends State<EstoqueView> {
                 barcode,
                 textAlign: TextAlign.center,
               ),
-            )
+            ),
           ],
         ),
       ),

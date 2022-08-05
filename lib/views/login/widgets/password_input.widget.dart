@@ -6,9 +6,14 @@ class PasswordInputWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ArpReactivePasswordInput(
+    return ArpReactivePasswordInput(
       label: 'Senha',
       controlName: 'password',
+      validationMessages: (control) => {
+        'required': 'Informe uma senha válida',
+        'minLength': 'Formato de senha inválido',
+        'maxLength': 'Formato de senha inválido',
+      },
     );
   }
 }

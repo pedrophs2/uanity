@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uanity/entities/usuario.dart';
+import 'package:uanity/shared/arp_list_view.dart';
 import 'package:uanity/uanity-api/users/user_controller.dart';
 import 'package:uanity/views/equipe/list/widgets/staff_list_item.widget.dart';
 
@@ -12,6 +13,7 @@ class StaffListWidget extends StatefulWidget {
 
 class _StaffListWidgetState extends State<StaffListWidget> {
   List<Usuario> usuarios = [];
+
   Future<void> _populateUsuarios() async {
     List<Usuario> _usuarios = await UserController().listAll();
 
@@ -25,14 +27,11 @@ class _StaffListWidgetState extends State<StaffListWidget> {
     WidgetsBinding.instance
         .addPostFrameCallback((_) async => await _populateUsuarios());
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: usuarios
-          .map(
-            (Usuario usuario) => StaffListItemWidget(usuario: usuario),
-          )
-          .toList(),
+    return ArpListViewWidget(
+      items: usuarios,
+      itemBuilder: (context, index) {
+        return StaffListItemWidget(usuario: usuarios[index]);
+      },
     );
   }
 }

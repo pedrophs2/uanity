@@ -18,6 +18,8 @@ class LoginHelper {
       var authDto = jsonDecode(res.body);
       await storage.write(key: 'token', value: authDto['token']);
 
+      print(authDto);
+
       Navigator.of(context).pushReplacementNamed(AppRoutes.home);
     } else {
       SnackHelper().present(context, 'CPF ou senha incorretos');

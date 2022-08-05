@@ -8,6 +8,7 @@ class ArpReactiveInput extends StatelessWidget {
   final bool readOnly;
   final Widget? prefix;
   final Widget? suffix;
+  final ValidationMessagesFunction<dynamic>? validationMessages;
 
   const ArpReactiveInput({
     Key? key,
@@ -15,6 +16,7 @@ class ArpReactiveInput extends StatelessWidget {
     this.readOnly = false,
     this.prefix,
     this.suffix,
+    this.validationMessages,
     required this.label,
     required this.controlName,
   }) : super(key: key);
@@ -25,6 +27,7 @@ class ArpReactiveInput extends StatelessWidget {
       formControlName: controlName,
       keyboardType: keyboardType,
       readOnly: readOnly,
+      validationMessages: validationMessages,
       decoration: InputDecoration(
         label: Text(label),
         border: const OutlineInputBorder(),

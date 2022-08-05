@@ -4,6 +4,7 @@ import 'package:uanity/views/estoque/form/produto_form.state.dart';
 import 'package:uanity/views/estoque/form/widgets/barcode_input.widget.dart';
 import 'package:uanity/views/estoque/form/widgets/product_label_input.widget.dart';
 import 'package:uanity/views/estoque/form/widgets/product_name_input.widget.dart';
+import 'package:uanity/views/estoque/form/widgets/save_button.widget.dart';
 
 class ProdutoFormWidget extends StatefulWidget {
   const ProdutoFormWidget({Key? key}) : super(key: key);
@@ -35,6 +36,7 @@ class _ProdutoFormWidgetState extends State<ProdutoFormWidget> {
               ProductLabelInput(),
               SizedBox(height: 10.0),
               BarcodeInputWidget(),
+              SaveButtonWidget()
             ],
           ),
         ),
